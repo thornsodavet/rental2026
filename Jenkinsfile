@@ -50,13 +50,13 @@ pipeline {
                 echo 'កំពុងទាញយក និងដាក់ឱ្យដំណើរការ...'
                 // 1. បញ្ឈប់ និងលុប Container ចាស់ (ប្រសិនបើមាន) ដើម្បីកុំឱ្យជាន់គ្នា
                 sh '''
-                    docker stop ${IMAGE_NAME}  true
-                    docker rm ${IMAGE_NAME}  true
+                    docker stop ${IMAGE_NAME} || true
+                    docker rm ${IMAGE_NAME} || true
                 '''
                 
                 // 2. ដំណើរការ Container ថ្មី
                 // ឧទាហរណ៍ ភ្ជាប់ Port 80 ទូទៅ ទៅកាន់ Port 8000 របស់កម្មវិធី Django
-                sh 'docker run -d --name ${IMAGE_NAME} -p 8080:80 ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG}'
+                sh 'docker run -d --name ${IMAGE_NAME} -p 8000:80 ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG}'
             }
         }
     }
